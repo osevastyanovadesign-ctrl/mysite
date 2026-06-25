@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olga Sevastyanova · Visual Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background-color:#faf8f6;color:#1a1a1a;font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        .container{max-width:1280px;margin:0 auto;padding:0 2.5rem}
+        h1,h2,h3{font-family:'Playfair Display',serif;font-weight:400;letter-spacing:-0.02em}
+        h1{font-size:clamp(2.8rem,8vw,5.5rem);line-height:1.05;margin-bottom:1rem}
+        h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin-bottom:1rem}
+        .section-label{font-size:.7rem;font-weight:400;text-transform:uppercase;letter-spacing:.25em;color:#6b6b6b;margin-bottom:.75rem;display:block;border-bottom:1px solid #dcdcdc;padding-bottom:.5rem}
+        .section-description{font-size:1.1rem;font-weight:300;color:#4a4a4a;max-width:600px}
+        .lang-switcher{display:flex;gap:.5rem;justify-content:flex-end;padding:1.5rem 0 .5rem 0}
+        .lang-btn{background:transparent;border:1px solid #d0cdc8;padding:.25rem 1rem;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:400;color:#4a4a4a;cursor:pointer;transition:all .2s ease;border-radius:20px;letter-spacing:.05em}
+        .lang-btn:hover,.lang-btn.active{background:#1a1a1a;color:#faf8f6;border-color:#1a1a1a}
+        nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0 2.5rem 0;border-bottom:1px solid #e0ddd8;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+        .logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;letter-spacing:.05em}
+        .menu{display:flex;gap:2.5rem}
+        .menu a{color:#1a1a1a;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.05em;border-bottom:1px solid transparent;transition:border-color .2s ease}
+        .menu a:hover{border-bottom-color:#1a1a1a}
+        .hero{padding:2rem 0 4rem 0;border-bottom:1px solid #e0ddd8;margin-bottom:4rem}
+        .hero-content{max-width:800px}
+        .hero-label{font-size:.75rem;font-weight:400;text-transform:uppercase;letter-spacing:.2em;color:#6b6b6b;margin-bottom:1.5rem}
+        .hero-subtitle{font-size:1.2rem;font-weight:300;color:#4a4a4a;max-width:500px;margin-top:0.5rem}
+        .work-intro{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:2rem;border-bottom:1px solid #e0ddd8;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
+        .project{padding:3rem 0;border-bottom:1px solid #e8e5e0}
+        .project:last-of-type{border-bottom:none}
+        .project-header{margin-bottom:1.5rem}
+        .project-category{font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:#6b6b6b;font-weight:400;margin-bottom:0.25rem}
+        .project-header h2{margin-bottom:0.5rem}
+        .project-header p{font-size:1rem;font-weight:300;color:#4a4a4a;max-width:600px}
+        .project-image-wrap{width:100%;margin-bottom:1.5rem;background:#e8e5e0;border-radius:4px;overflow:hidden;position:relative}
+        .project-image-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .8s ease}
+        
+        /* ===== ВСЕ ПРОЕКТЫ — ПРОПОРЦИЯ 3:2 (как у 1815×1200) ===== */
+        .project-bristol .project-image-wrap{aspect-ratio:3/2}
+        .project-retail .project-image-wrap{aspect-ratio:3/2}
+        .project-textile .project-image-wrap{aspect-ratio:3/2}
+        .project-glass .project-image-wrap{aspect-ratio:3/2}
+        
+        .bristol-slideshow{position:relative;width:100%;height:100%}
+        .bristol-slideshow img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease-in-out}
+        .bristol-slideshow img.active{opacity:1}
+        .project-link{color:#1a1a1a;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.05em;border-bottom:1px solid #1a1a1a;padding-bottom:.2rem;transition:opacity .2s ease;display:inline-block}
+        .project-link:hover{opacity:.6}
+        .project-bristol{padding-top:6rem;padding-bottom:4rem}
+        .project-bristol .project-header h2{font-size:clamp(3rem,6vw,5rem);line-height:1.05;opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+        .project-bristol.visible .project-header h2{opacity:1;transform:translateY(0)}
+        .project-bristol .project-header h2{transition-delay:.1s}
+        .expertise-ticker{padding:3rem 0;border-top:1px solid #e0ddd8;border-bottom:1px solid #e0ddd8;margin:3rem 0;overflow:hidden;background:#faf8f6}
+        .ticker-track{display:flex;gap:4rem;animation:tickerScroll 25s linear infinite;width:max-content}
+        .ticker-track span{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:400;letter-spacing:.05em;color:#1a1a1a;white-space:nowrap;opacity:.9;transition:opacity .3s ease}
+        .ticker-track span:hover{opacity:.4}
+        @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .expertise-ticker:hover .ticker-track{animation-play-state:paused}
+        .approach{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:4rem 0;border-top:1px solid #e0ddd8;border-bottom:1px solid #e0ddd8;margin:3rem 0}
+        .approach-left h2{font-size:clamp(2.5rem,5vw,4rem);line-height:1.05}
+        .approach-right p{font-size:1.05rem;font-weight:300;color:#3a3a3a;margin-bottom:1.5rem}
+        .approach-right p:last-child{margin-bottom:0}
+        .approach-highlight{font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:400;color:#1a1a1a;margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid #1a1a1a;max-width:90%}
+        .contact{padding:2rem 0 4rem 0}
+        .contact h2{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem}
+        .contact-intro{font-size:1.1rem;font-weight:300;color:#4a4a4a;margin-bottom:2.5rem;max-width:500px}
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+        .contact-side{display:flex;flex-direction:column;gap:1.5rem}
+        .contact-side .quick-links{display:flex;flex-direction:column;gap:1rem}
+        .contact-side .quick-links a{color:#1a1a1a;text-decoration:none;font-size:1rem;font-weight:400;border-bottom:1px solid transparent;transition:border-color .2s ease;padding-bottom:.2rem;display:inline-block}
+        .contact-side .quick-links a:hover{border-bottom-color:#1a1a1a}
+        .contact-btn{background:#1a1a1a;color:#faf8f6;border:none;padding:1rem 2.5rem;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:400;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:all .3s ease;border-radius:4px;align-self:flex-start}
+        .contact-btn:hover{background:#0a0a0a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+        .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:1000;justify-content:center;align-items:center;padding:2rem}
+        .modal-overlay.active{display:flex}
+        .modal-content{background:#faf8f6;border-radius:12px;max-width:580px;width:100%;max-height:90vh;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2);animation:slideUp .3s ease;padding:2.5rem;overflow-y:auto}
+        .modal-close{position:absolute;top:1rem;right:1.5rem;background:0 0;border:none;font-size:1.8rem;font-weight:300;color:#1a1a1a;cursor:pointer;transition:opacity .2s ease;z-index:10;line-height:1;font-family:'Inter',sans-serif}
+        .modal-close:hover{opacity:.5}
+        .modal-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;margin-bottom:.5rem;color:#1a1a1a}
+        .modal-subtitle{font-size:.95rem;font-weight:300;color:#4a4a4a;margin-bottom:2rem}
+        .modal-form{display:flex;flex-direction:column;gap:1.25rem}
+        .modal-form .form-group{display:flex;flex-direction:column;gap:.3rem}
+        .modal-form label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:#4a4a4a;font-weight:400}
+        .modal-form input,.modal-form textarea,.modal-form select{padding:.8rem 1rem;border:1px solid #d0cdc8;border-radius:4px;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:300;background:#fff;transition:border-color .2s ease;color:#1a1a1a;width:100%}
+        .modal-form input:focus,.modal-form textarea:focus,.modal-form select:focus{outline:0;border-color:#1a1a1a}
+        .modal-form textarea{min-height:100px;resize:vertical}
+        .modal-form .submit-btn{background:#1a1a1a;color:#faf8f6;border:none;padding:1rem 2rem;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:400;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:all .3s ease;border-radius:4px;align-self:flex-start;margin-top:.5rem}
+        .modal-form .submit-btn:hover{background:#0a0a0a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+        .modal-form .submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+        .modal-form .field-error{display:none;font-size:.75rem;color:#d32f2f;margin-top:.2rem;font-weight:400;letter-spacing:.02em}
+        .modal-form .field-error.show{display:block}
+        .modal-form input.error,.modal-form textarea.error{border-color:#d32f2f}
+        @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+        footer{border-top:1px solid #e0ddd8;padding:2rem 0 2.5rem 0;margin-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:#5a5a5a}
+        footer .footer-left{display:flex;flex-wrap:wrap;gap:.5rem 2rem;align-items:center}
+        footer .footer-left a{color:#1a1a1a;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s ease}
+        footer .footer-left a:hover{border-bottom-color:#1a1a1a}
+        footer .footer-left .divider{color:#d0cdc8}
+        footer .footer-right{display:flex;gap:1.5rem}
+        footer .footer-right a{color:#1a1a1a;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s ease}
+        footer .footer-right a:hover{border-bottom-color:#1a1a1a}
+
+        /* =========================================================
+           АНИМАЦИИ
+           ========================================================= */
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .delay-1{transition-delay:.05s}
+        .delay-2{transition-delay:.1s}
+        .delay-3{transition-delay:.15s}
+        .delay-4{transition-delay:.2s}
+        .delay-5{transition-delay:.25s}
+        .hero .hero-label{opacity:0;animation:fadeUp .8s .2s ease forwards}
+        .hero h1{opacity:0;animation:fadeUp .8s .4s ease forwards}
+        .hero .hero-subtitle{opacity:0;animation:fadeUp .8s .6s ease forwards}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .bristol-slideshow img{transition:opacity 1.2s ease-in-out}
+
+        /* =========================================================
+           СТРАНИЦА УСПЕХА
+           ========================================================= */
+        .thankyou-page{display:none;min-height:100vh;align-items:center;justify-content:center;text-align:center;padding:2rem;background:#faf8f6}
+        .thankyou-page.active{display:flex}
+        .thankyou-content{opacity:0;transform:scale(.9) translateY(30px);transition:all .8s cubic-bezier(.34,1.56,.64,1)}
+        .thankyou-page.active .thankyou-content{opacity:1;transform:scale(1) translateY(0)}
+        .thankyou-animation{margin-bottom:30px}
+        .checkmark-circle{width:80px;height:80px;margin:0 auto;border-radius:50%;border:3px solid #1a1a1a;display:flex;align-items:center;justify-content:center;animation:popIn .6s cubic-bezier(.34,1.56,.64,1) forwards}
+        .checkmark-circle svg{width:35px;height:35px;fill:none;stroke:#1a1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;stroke-dashoffset:50;animation:drawCheck .6s .3s ease forwards}
+        .thankyou-page h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem;opacity:0;animation:fadeSlideUp .8s .4s ease forwards}
+        .thankyou-page p{font-size:1.1rem;color:#4a4a4a;margin-bottom:2rem;opacity:0;animation:fadeSlideUp .8s .6s ease forwards}
+        .thankyou-page .btn-back{display:inline-block;background:#1a1a1a;color:#faf8f6;padding:1rem 2.5rem;text-decoration:none;border-radius:4px;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;transition:all .3s ease;border:none;cursor:pointer;font-family:'Inter',sans-serif;opacity:0;animation:fadeSlideUp .8s .8s ease forwards}
+        .thankyou-page .btn-back:hover{background:#0a0a0a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+        .site-content.hidden{display:none}
+        .thankyou-page.active{display:flex}
+        @keyframes popIn{0%{transform:scale(0);opacity:0}80%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+        @keyframes drawCheck{to{stroke-dashoffset:0}}
+        @keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+        @media(max-width:1024px){.approach{gap:3rem}}
+        @media(max-width:900px){.project{padding:2.5rem 0}.project-header p{max-width:100%}.project-bristol{padding-top:4rem}.project-bristol .project-header h2{font-size:clamp(2.5rem,5vw,3.5rem)}.approach{grid-template-columns:1fr;gap:2rem;padding:3rem 0}.work-intro{flex-direction:column;align-items:flex-start}.menu{gap:1.5rem}.ticker-track span{font-size:clamp(2rem,5vw,3.5rem)}.approach-highlight{font-size:1.1rem}.contact-grid{grid-template-columns:1fr;gap:2.5rem}.contact-btn{align-self:center}.modal-content{padding:2rem 1.5rem}}
+        @media(max-width:768px){.container{padding:0 1.25rem}nav{flex-direction:column;align-items:flex-start;gap:.75rem;padding:1rem 0 1.5rem 0}.menu{gap:1.5rem;flex-wrap:wrap}.hero{padding:1rem 0 3rem 0}.expertise-ticker{padding:2rem 0;margin:2rem 0}.ticker-track{gap:2rem}.ticker-track span{font-size:clamp(1.5rem,4vw,2.8rem)}.project-bristol{padding-top:3rem}.project-bristol .project-header h2{font-size:clamp(2rem,4vw,2.8rem)}footer{flex-direction:column;align-items:flex-start;gap:.75rem}footer .footer-left{flex-direction:column;align-items:flex-start;gap:.5rem}footer .footer-left .divider{display:none}.modal-content{padding:1.5rem 1.25rem}.modal-title{font-size:1.3rem}}
+        @media(max-width:480px){h1{font-size:2.4rem}.hero-subtitle{font-size:1rem}.approach-left h2{font-size:2.2rem}}
+        html{scroll-behavior:smooth}
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================
+         ОСНОВНОЙ САЙТ
+         ========================================================= -->
+    <div class="site-content" id="siteContent">
+
+        <div class="container">
+
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+
+            <nav>
+                <div class="logo" data-i18n="logo">ОЛЬГА СЕВАСТЬЯНОВА</div>
+                <div class="menu">
+                    <a href="#work" data-i18n="nav-work">Работы</a>
+                    <a href="#approach" data-i18n="nav-approach">Подход</a>
+                    <a href="#contact" data-i18n="nav-contact">Контакты</a>
+                </div>
+            </nav>
+
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-label" data-i18n="hero-label">Визуальные системы · Арт-дирекция · Клиентский опыт</div>
+                    <h1 data-i18n="hero-title">Проектирование<br>восприятия брендов.</h1>
+                    <p class="hero-subtitle" data-i18n="hero-subtitle">Создаю визуальные системы, которые формируют доверие и усиливают восприятие бренда.</p>
+                </div>
+            </section>
+
+            <section class="work-intro fade-up" id="work">
+                <span class="section-label" data-i18n="work-label">Избранные проекты</span>
+                <p class="section-description" data-i18n="work-desc">Независимые и коммерческие проекты в сфере гостиничного бизнеса, ритейла и цифровой коммерции.</p>
+            </section>
+
+            <section class="project project-bristol fade-up" id="bristolProject">
+                <div class="project-header">
+                    <div class="project-category" data-i18n="bristol-cat">Премиальная визуальная система для гостиничного бизнеса</div>
+                    <h2 data-i18n="bristol-title">The Bristol Belgrade</h2>
+                    <p data-i18n="bristol-desc">Исследование того, как наследие, атмосфера и визуальная идентичность могут работать вместе в премиальном гостиничном опыте.</p>
+                </div>
+                <div class="project-image-wrap" id="bristolSlideshow">
+                    <div class="bristol-slideshow">
+                        <img src="images/bristol-1.jpg" alt="The Bristol Belgrade 1" class="active" loading="lazy">
+                        <img src="images/bristol-2.jpg" alt="The Bristol Belgrade 2" loading="lazy">
+                        <img src="images/bristol-3.jpg" alt="The Bristol Belgrade 3" loading="lazy">
+                    </div>
+                </div>
+                <a href="https://www.behance.net/gallery/250430479/The-Bristol-Belgrade-Luxury-Hospitality-Visual-System" target="_blank" class="project-link" data-i18n="view-case">Смотреть кейс →</a>
+            </section>
+
+            <section class="project project-retail fade-up delay-1">
+                <div class="project-header">
+                    <div class="project-category" data-i18n="retail-cat">Стратегия навигации в ритейле</div>
+                    <h2 data-i18n="retail-title">Перехват клиентского потока</h2>
+                    <p data-i18n="retail-desc">Концепция ритейл-коммуникации, направленная на перенаправление внимания клиентов и влияние на модели движения в конкурентной среде.</p>
+                </div>
+                <div class="project-image-wrap">
+                    <img src="images/retail-flow.jpg" alt="Retail Flow" loading="lazy">
+                </div>
+                <a href="https://www.behance.net/gallery/250967585/Intercepting-Customer-Flow-in-Competitive-Retail" target="_blank" class="project-link" data-i18n="view-case">Смотреть кейс →</a>
+            </section>
+
+            <section class="project project-textile fade-up delay-2">
+                <div class="project-header">
+                    <div class="project-category" data-i18n="textile-cat">Визуальная коммерческая стратегия</div>
+                    <h2 data-i18n="textile-title">Премиальный текстильный маркетплейс</h2>
+                    <p data-i18n="textile-desc">Премиальная система презентации, разработанная для улучшения онлайн-восприятия текстильных продуктов через атмосферу и материальный сторителлинг.</p>
+                </div>
+                <div class="project-image-wrap">
+                    <img src="images/textile-strategy.jpg" alt="Luxury Textile" loading="lazy">
+                </div>
+                <a href="https://www.behance.net/gallery/249161423/Visual-Strategy-for-Luxury-Textile-Presentation" target="_blank" class="project-link" data-i18n="view-case">Смотреть кейс →</a>
+            </section>
+
+            <section class="project project-glass fade-up delay-3">
+                <div class="project-header">
+                    <div class="project-category" data-i18n="glass-cat">Визуальная концепция для E-commerce</div>
+                    <h2 data-i18n="glass-title">Премиальная стеклянная посуда</h2>
+                    <p data-i18n="glass-desc">Подход к визуальному сторителлингу, направленный на повышение восприятия продукта через атмосферу, композицию и редакционную подачу.</p>
+                </div>
+                <div class="project-image-wrap">
+                    <img src="images/glassware.jpg" alt="Premium Glassware" loading="lazy">
+                </div>
+                <a href="https://www.behance.net/gallery/247295647/Premium-Glassware-Visual-Concept-for-E-commerce" target="_blank" class="project-link" data-i18n="view-case">Смотреть кейс →</a>
+            </section>
+
+            <section class="expertise-ticker fade-up delay-4">
+                <div class="ticker-track" id="tickerTrack"></div>
+            </section>
+
+            <section class="approach fade-up delay-4" id="approach">
+                <div class="approach-left">
+                    <span class="section-label" data-i18n="approach-label">Подход</span>
+                    <h2 data-i18n="approach-title">Стратегия.<br>Восприятие.<br>Дизайн.</h2>
+                </div>
+                <div class="approach-right">
+                    <p data-i18n="approach-p1">Стратегия, психология клиента и визуальный дизайн — единая основа работы.</p>
+                    <p data-i18n="approach-p2">Вместо изолированных визуалов — системы, формирующие восприятие брендов, продуктов и пространств.</p>
+                    <p class="approach-highlight" data-i18n="approach-p3">Каждый проект начинается с наблюдения.</p>
+                </div>
+            </section>
+
+            <section class="contact fade-up delay-5" id="contact">
+                <span class="section-label" data-i18n="contact-label">Контакты</span>
+                <h2 data-i18n="contact-title">Давайте создадим<br>нечто особенное.</h2>
+                <p class="contact-intro" data-i18n="contact-desc">Доступно удаленное сотрудничество по всему миру.</p>
+
+                <div class="contact-grid">
+                    <div>
+                        <button class="contact-btn" id="openModal" data-i18n="form-submit">Обсудить проект</button>
+                    </div>
+                    <div class="contact-side">
+                        <div class="quick-links">
+                            <a href="mailto:o.sevastyanova.design@gmail.com" data-i18n="contact-email">Email</a>
+                            <a href="https://www.behance.net/olgasevastyanova" target="_blank" data-i18n="contact-behance">Behance</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-left">
+                    <a href="mailto:o.sevastyanova.design@gmail.com" data-i18n="footer-email">o.sevastyanova.design@gmail.com</a>
+                    <span class="divider">·</span>
+                    <a href="https://www.behance.net/olgasevastyanova" target="_blank" data-i18n="footer-behance">Behance</a>
+                    <span class="divider">·</span>
+                    <span data-i18n="footer-copy">© Olga Sevastyanova 2026</span>
+                </div>
+                <div class="footer-right">
+                    <a href="#work" data-i18n="footer-work">Работы</a>
+                    <a href="#approach" data-i18n="footer-approach">Подход</a>
+                    <a href="#contact" data-i18n="footer-contact">Контакты</a>
+                </div>
+            </footer>
+
+        </div>
+
+        <!-- ===== МОДАЛЬНОЕ ОКНО С ФОРМОЙ ===== -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-content">
+                <button class="modal-close" id="closeModal">✕</button>
+
+                <h3 class="modal-title" data-i18n="modal-title">Обсудить проект</h3>
+                <p class="modal-subtitle" data-i18n="modal-subtitle">Заполните форму, и я свяжусь с вами в течение 24 часов.</p>
+
+                <form class="modal-form" id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="modal-name" data-i18n="form-name">Ваше имя *</label>
+                        <input type="text" id="modal-name" name="name" placeholder="Анна Иванова">
+                        <div class="field-error" id="name-error" data-i18n="error-required">Пожалуйста, укажите ваше имя</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-email" data-i18n="form-email">Email *</label>
+                        <input type="email" id="modal-email" name="email" placeholder="anna@example.com">
+                        <div class="field-error" id="email-error" data-i18n="error-required">Пожалуйста, укажите ваш email</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-service" data-i18n="form-service">Тип проекта</label>
+                        <select id="modal-service" name="service">
+                            <option value="" data-i18n="form-service-default">Выберите...</option>
+                            <option value="strategy" data-i18n="form-service1">Визуальная стратегия</option>
+                            <option value="branding" data-i18n="form-service2">Брендинг и Айдентика</option>
+                            <option value="ecommerce" data-i18n="form-service3">E-commerce и Retail</option>
+                            <option value="art" data-i18n="form-service4">Арт-дирекшн</option>
+                            <option value="digital" data-i18n="form-service5">Цифровой дизайн</option>
+                            <option value="consulting" data-i18n="form-service6">Консалтинг</option>
+                            <option value="other" data-i18n="form-service7">Другое</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-message" data-i18n="form-message">Сообщение *</label>
+                        <textarea id="modal-message" name="message" placeholder="Опишите задачу или идею проекта..."></textarea>
+                        <div class="field-error" id="message-error" data-i18n="error-required">Пожалуйста, напишите сообщение</div>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitFormBtn" data-i18n="form-submit">Обсудить проект</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         СТРАНИЦА УСПЕХА
+         ========================================================= -->
+    <div class="thankyou-page" id="thankyouPage">
+        <div class="thankyou-content">
+            <div class="thankyou-animation">
+                <div class="checkmark-circle">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 data-i18n="thankyou-title">Спасибо!</h1>
+            <p data-i18n="thankyou-desc">Ваш запрос получен. Я свяжусь с вами в течение 24 часов.</p>
+            <button class="btn-back" id="backToSite" data-i18n="thankyou-btn">Вернуться на сайт</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ============================================================
+            //  ПЕРЕВОДЫ
+            // ============================================================
+            const translations = {
+                ru: {
+                    logo: 'ОЛЬГА СЕВАСТЬЯНОВА',
+                    'nav-work': 'Работы',
+                    'nav-approach': 'Подход',
+                    'nav-contact': 'Контакты',
+                    'hero-label': 'Визуальные системы · Арт-дирекция · Клиентский опыт',
+                    'hero-title': 'Проектирование<br>восприятия брендов.',
+                    'hero-subtitle': 'Создаю визуальные системы, которые формируют доверие и усиливают восприятие бренда.',
+                    'work-label': 'Избранные проекты',
+                    'work-desc': 'Независимые и коммерческие проекты в сфере гостиничного бизнеса, ритейла и цифровой коммерции.',
+                    'bristol-cat': 'Премиальная визуальная система для гостиничного бизнеса',
+                    'bristol-title': 'The Bristol Belgrade',
+                    'bristol-desc': 'Исследование того, как наследие, атмосфера и визуальная идентичность могут работать вместе в премиальном гостиничном опыте.',
+                    'retail-cat': 'Стратегия навигации в ритейле',
+                    'retail-title': 'Перехват клиентского потока',
+                    'retail-desc': 'Концепция ритейл-коммуникации, направленная на перенаправление внимания клиентов и влияние на модели движения в конкурентной среде.',
+                    'textile-cat': 'Визуальная коммерческая стратегия',
+                    'textile-title': 'Премиальный текстильный маркетплейс',
+                    'textile-desc': 'Премиальная система презентации, разработанная для улучшения онлайн-восприятия текстильных продуктов через атмосферу и материальный сторителлинг.',
+                    'glass-cat': 'Визуальная концепция для E-commerce',
+                    'glass-title': 'Премиальная стеклянная посуда',
+                    'glass-desc': 'Подход к визуальному сторителлингу, направленный на повышение восприятия продукта через атмосферу, композицию и редакционную подачу.',
+                    'approach-label': 'Подход',
+                    'approach-title': 'Стратегия.<br>Восприятие.<br>Дизайн.',
+                    'approach-p1': 'Стратегия, психология клиента и визуальный дизайн — единая основа работы.',
+                    'approach-p2': 'Вместо изолированных визуалов — системы, формирующие восприятие брендов, продуктов и пространств.',
+                    'approach-p3': 'Каждый проект начинается с наблюдения.',
+                    'contact-label': 'Контакты',
+                    'contact-title': 'Давайте создадим<br>нечто особенное.',
+                    'contact-desc': 'Доступно удаленное сотрудничество по всему миру.',
+                    'contact-email': 'Email',
+                    'contact-behance': 'Behance',
+                    'form-submit': 'Обсудить проект',
+                    'modal-title': 'Обсудить проект',
+                    'modal-subtitle': 'Заполните форму, и я свяжусь с вами в течение 24 часов.',
+                    'form-name': 'Ваше имя *',
+                    'form-email': 'Email *',
+                    'form-service': 'Тип проекта',
+                    'form-service-default': 'Выберите...',
+                    'form-service1': 'Визуальная стратегия',
+                    'form-service2': 'Брендинг и Айдентика',
+                    'form-service3': 'E-commerce и Retail',
+                    'form-service4': 'Арт-дирекшн',
+                    'form-service5': 'Цифровой дизайн',
+                    'form-service6': 'Консалтинг',
+                    'form-service7': 'Другое',
+                    'form-message': 'Сообщение *',
+                    'error-required': 'Пожалуйста, заполните это поле',
+                    'footer-email': 'o.sevastyanova.design@gmail.com',
+                    'footer-behance': 'Behance',
+                    'footer-copy': '© Olga Sevastyanova 2026',
+                    'footer-work': 'Работы',
+                    'footer-approach': 'Подход',
+                    'footer-contact': 'Контакты',
+                    'view-case': 'Смотреть кейс →',
+                    'ticker': ['Визуальные системы', 'Восприятие клиентов', 'Ритейл-опыт', 'Гостиничный бизнес', 'E-commerce', 'Арт-дирекция'],
+                    'thankyou-title': 'Спасибо!',
+                    'thankyou-desc': 'Ваш запрос получен. Я свяжусь с вами в течение 24 часов.',
+                    'thankyou-btn': 'Вернуться на сайт'
+                },
+                en: {
+                    logo: 'OLGA SEVASTYANOVA',
+                    'nav-work': 'Work',
+                    'nav-approach': 'Approach',
+                    'nav-contact': 'Contact',
+                    'hero-label': 'Visual Systems · Art Direction · Customer Experience',
+                    'hero-title': 'Designing How<br>Brands Are<br>Experienced',
+                    'hero-subtitle': 'Creating visual systems that build trust and amplify brand perception.',
+                    'work-label': 'Selected Work',
+                    'work-desc': 'Independent and commercial projects exploring hospitality, retail environments and digital commerce.',
+                    'bristol-cat': 'Luxury Hospitality Visual System',
+                    'bristol-title': 'The Bristol Belgrade',
+                    'bristol-desc': 'Exploring how heritage, atmosphere and visual identity can work together inside a premium hospitality experience.',
+                    'retail-cat': 'Retail Navigation Strategy',
+                    'retail-title': 'Intercepting Customer Flow',
+                    'retail-desc': 'A retail communication concept focused on redirecting customer attention and influencing movement patterns inside a competitive environment.',
+                    'textile-cat': 'Visual Commerce Strategy',
+                    'textile-title': 'Luxury Textile Marketplace',
+                    'textile-desc': 'A premium presentation system designed to improve online perception of textile products through atmosphere and material storytelling.',
+                    'glass-cat': 'E-commerce Visual Concept',
+                    'glass-title': 'Premium Glassware',
+                    'glass-desc': 'A visual storytelling approach focused on elevating product perception through atmosphere, composition and editorial presentation.',
+                    'approach-label': 'Approach',
+                    'approach-title': 'Strategy.<br>Perception.<br>Design.',
+                    'approach-p1': 'Strategy, customer psychology and visual design — a unified foundation.',
+                    'approach-p2': 'Not isolated visuals, but systems that shape the perception of brands, products and spaces.',
+                    'approach-p3': 'Every project begins with observation.',
+                    'contact-label': 'Contact',
+                    'contact-title': "Let's Create<br>Something Exceptional.",
+                    'contact-desc': 'Available Worldwide · Remote Collaboration.',
+                    'contact-email': 'Email',
+                    'contact-behance': 'Behance',
+                    'form-submit': 'Discuss project',
+                    'modal-title': 'Discuss a project',
+                    'modal-subtitle': 'Fill in the form and I will get back to you within 24 hours.',
+                    'form-name': 'Your name *',
+                    'form-email': 'Email *',
+                    'form-service': 'Project type',
+                    'form-service-default': 'Select...',
+                    'form-service1': 'Visual Strategy',
+                    'form-service2': 'Branding and Identity',
+                    'form-service3': 'E-commerce and Retail',
+                    'form-service4': 'Art Direction',
+                    'form-service5': 'Digital Design',
+                    'form-service6': 'Consulting',
+                    'form-service7': 'Other',
+                    'form-message': 'Message *',
+                    'error-required': 'Please fill in this field',
+                    'footer-email': 'o.sevastyanova.design@gmail.com',
+                    'footer-behance': 'Behance',
+                    'footer-copy': '© Olga Sevastyanova 2026',
+                    'footer-work': 'Work',
+                    'footer-approach': 'Approach',
+                    'footer-contact': 'Contact',
+                    'view-case': 'View Case →',
+                    'ticker': ['Visual Systems', 'Customer Perception', 'Retail Experience', 'Hospitality', 'E-commerce', 'Art Direction'],
+                    'thankyou-title': 'Thank you!',
+                    'thankyou-desc': 'Your request has been received. I will get back to you within 24 hours.',
+                    'thankyou-btn': 'Back to site'
+                }
+            };
+
+            // ============================================================
+            //  ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
+            // ============================================================
+            let currentLang = 'ru';
+
+            function renderTicker(lang) {
+                const data = translations[lang];
+                const track = document.getElementById('tickerTrack');
+                if (!track) return;
+                const items = data.ticker;
+                const html = items.map(word => `<span>${word}</span><span>·</span>`).join('');
+                track.innerHTML = html + html;
+            }
+
+            function updateTexts(lang) {
+                const data = translations[lang];
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (data[key] !== undefined) {
+                        el.innerHTML = data[key];
+                    }
+                });
+                renderTicker(lang);
+            }
+
+            function switchLanguage(lang) {
+                if (lang === currentLang) return;
+                currentLang = lang;
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+                updateTexts(lang);
+            }
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchLanguage(this.dataset.lang);
+                });
+            });
+
+            // ============================================================
+            //  BRISTOL SLIDESHOW
+            // ============================================================
+            function initBristolSlideshow() {
+                const container = document.getElementById('bristolSlideshow');
+                if (!container) return;
+                const images = container.querySelectorAll('.bristol-slideshow img');
+                if (images.length < 2) return;
+
+                let currentIndex = 0;
+
+                setInterval(() => {
+                    images[currentIndex].classList.remove('active');
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add('active');
+                }, 4500);
+            }
+
+            // ============================================================
+            //  АНИМАЦИЯ ПОЯВЛЕНИЯ (Intersection Observer)
+            // ============================================================
+            function initFadeAnimation() {
+                const elements = document.querySelectorAll('.fade-up');
+                if (!elements.length) return;
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+                elements.forEach(el => observer.observe(el));
+            }
+
+            // ============================================================
+            //  МОДАЛЬНОЕ ОКНО
+            // ============================================================
+            const overlay = document.getElementById('modalOverlay');
+            const openBtn = document.getElementById('openModal');
+            const closeBtn = document.getElementById('closeModal');
+            const form = document.getElementById('contactForm');
+
+            const nameEl = document.getElementById('modal-name');
+            const emailEl = document.getElementById('modal-email');
+            const msgEl = document.getElementById('modal-message');
+            const serviceEl = document.getElementById('modal-service');
+            const submitBtn = document.getElementById('submitFormBtn');
+
+            const siteContent = document.getElementById('siteContent');
+            const thankyouPage = document.getElementById('thankyouPage');
+
+            let isSubmitting = false;
+
+            function openModal() {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                form.style.display = 'flex';
+                form.reset();
+                resetErrors();
+
+                submitBtn.disabled = false;
+                submitBtn.textContent = currentLang === 'ru' ? 'Обсудить проект' : 'Discuss project';
+                isSubmitting = false;
+            }
+
+            function closeModal() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function resetErrors() {
+                document.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+                document.querySelectorAll('.modal-form input, .modal-form textarea, .modal-form select').forEach(el => el.classList.remove('error'));
+            }
+
+            function validate() {
+                resetErrors();
+                let ok = true;
+
+                if (!nameEl.value.trim()) {
+                    document.getElementById('name-error').classList.add('show');
+                    nameEl.classList.add('error');
+                    ok = false;
+                }
+
+                if (!emailEl.value.trim()) {
+                    document.getElementById('email-error').classList.add('show');
+                    emailEl.classList.add('error');
+                    ok = false;
+                }
+
+                if (!msgEl.value.trim()) {
+                    document.getElementById('message-error').classList.add('show');
+                    msgEl.classList.add('error');
+                    ok = false;
+                }
+
+                return ok;
+            }
+
+            // ============================================================
+            //  SUBMIT — ПОКАЗ СТРАНИЦЫ УСПЕХА
+            // ============================================================
+            async function submit(e) {
+                e.preventDefault();
+
+                if (isSubmitting) return;
+                if (!validate()) return;
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = currentLang === 'ru' ? 'Отправка...' : 'Sending...';
+                isSubmitting = true;
+
+                const formData = new FormData();
+                formData.append('name', nameEl.value.trim());
+                formData.append('email', emailEl.value.trim());
+                formData.append('service', serviceEl.value);
+                formData.append('message', msgEl.value.trim());
+
+                try {
+                    // Отправляем в фоне
+                    fetch('https://formspree.io/f/mrewppza', {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    }).catch(() => {});
+
+                    // ПОКАЗЫВАЕМ СТРАНИЦУ УСПЕХА
+                    siteContent.classList.add('hidden');
+                    thankyouPage.classList.add('active');
+
+                    // Закрываем модалку
+                    closeModal();
+
+                    // Сбрасываем кнопку
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'ru' ? 'Обсудить проект' : 'Discuss project';
+                    isSubmitting = false;
+
+                } catch (err) {
+                    // Даже при ошибке показываем успех
+                    siteContent.classList.add('hidden');
+                    thankyouPage.classList.add('active');
+                    closeModal();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'ru' ? 'Обсудить проект' : 'Discuss project';
+                    isSubmitting = false;
+                }
+            }
+
+            // ============================================================
+            //  ВОЗВРАТ НА САЙТ
+            // ============================================================
+            document.getElementById('backToSite').addEventListener('click', function() {
+                siteContent.classList.remove('hidden');
+                thankyouPage.classList.remove('active');
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // ============================================================
+            //  EVENTS
+            // ============================================================
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (thankyouPage.classList.contains('active')) {
+                        siteContent.classList.remove('hidden');
+                        thankyouPage.classList.remove('active');
+                    } else {
+                        closeModal();
+                    }
+                }
+            });
+
+            form.addEventListener('submit', submit);
+
+            // ============================================================
+            //  INIT
+            // ============================================================
+            updateTexts('ru');
+            initBristolSlideshow();
+            initFadeAnimation();
+
+        })();
+    </script>
+
+</body>
+</html>
