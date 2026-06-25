@@ -92,8 +92,8 @@
         .modal-form input.error,.modal-form textarea.error{border-color:#d32f2f}
         .modal-form .consent-check{display:flex;align-items:flex-start;gap:0.5rem;margin-top:0.25rem;cursor:pointer}
         .modal-form .consent-check input[type="checkbox"]{width:auto;margin-top:0.2rem;flex-shrink:0}
-        .modal-form .consent-check .consent-text{font-size:0.85rem;font-weight:300;color:#4a4a4a;line-height:1.4}
-        .modal-form .consent-check .consent-hint{font-size:0.75rem;color:#6b6b6b;display:block;margin-top:0.1rem}
+        .modal-form .consent-check .consent-text{font-size:0.8rem;font-weight:300;color:#4a4a4a;line-height:1.4}
+        .modal-form .consent-check .consent-hint{font-size:0.7rem;color:#6b6b6b;display:block;margin-top:0.1rem}
         @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
         footer{border-top:1px solid #e0ddd8;padding:2rem 0 2.5rem 0;margin-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:#5a5a5a}
         footer .footer-left{display:flex;flex-wrap:wrap;gap:.5rem 2rem;align-items:center}
@@ -309,13 +309,13 @@
                         <div class="field-error" id="message-error" data-i18n="error-required">Пожалуйста, напишите сообщение</div>
                     </div>
 
-                    <!-- ===== СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ ===== -->
+                    <!-- ===== СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ (уменьшенный шрифт, без звёздочки) ===== -->
                     <div class="form-group consent-check">
                         <label class="consent-check" style="display:flex; align-items:flex-start; gap:0.5rem; cursor:pointer;">
                             <input type="checkbox" id="consent" name="consent" required style="width:auto; margin-top:0.2rem; flex-shrink:0;">
                             <span>
                                 <span class="consent-text" data-i18n="consent-text">Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок. Только ответ от живого человека.</span>
-                                <span class="consent-hint" data-i18n="consent-hint">* Данные только для связи. Без спама.</span>
+                                <span class="consent-hint" data-i18n="consent-hint">Данные только для связи. Без спама.</span>
                             </span>
                         </label>
                     </div>
@@ -397,7 +397,7 @@
                     'form-message': 'Сообщение *',
                     'error-required': 'Пожалуйста, заполните это поле',
                     'consent-text': 'Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок. Только ответ от живого человека.',
-                    'consent-hint': '* Данные только для связи. Без спама.',
+                    'consent-hint': 'Данные только для связи. Без спама.',
                     'footer-email': 'o.sevastyanova.design@gmail.com',
                     'footer-behance': 'Behance',
                     'footer-copy': '© Olga Sevastyanova 2026',
@@ -459,7 +459,7 @@
                     'form-message': 'Message *',
                     'error-required': 'Please fill in this field',
                     'consent-text': 'Your information will only be used to reply to your inquiry. No mailing lists. No promotional emails. Just a response from a real person.',
-                    'consent-hint': '* Your data is only used to get back to you. No spam.',
+                    'consent-hint': 'Your data is only used to get back to you. No spam.',
                     'footer-email': 'o.sevastyanova.design@gmail.com',
                     'footer-behance': 'Behance',
                     'footer-copy': '© Olga Sevastyanova 2026',
