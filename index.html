@@ -92,9 +92,9 @@
         .modal-form input.error,.modal-form textarea.error{border-color:#d32f2f}
         .modal-form .consent-check{display:flex;align-items:flex-start;gap:0.5rem;margin-top:0.25rem;cursor:pointer}
         .modal-form .consent-check input[type="checkbox"]{width:auto;margin-top:0.2rem;flex-shrink:0}
-        .modal-form .consent-check .consent-text{font-size:0.8rem;font-weight:300;color:#4a4a4a;line-height:1.4}
-        .modal-form .consent-check .consent-text strong{font-weight:500}
-        .modal-form .consent-check .consent-hint{font-size:0.7rem;color:#6b6b6b;display:block;margin-top:0.1rem}
+        .modal-form .consent-check .consent-text{font-size:0.75rem;font-weight:300;color:#4a4a4a;line-height:1.5}
+        .modal-form .consent-check .consent-text strong{font-weight:400}
+        .modal-form .fax-field{background-color:#f0efec;color:#6b6b6b;cursor:not-allowed;opacity:0.7}
         @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
         footer{border-top:1px solid #e0ddd8;padding:2rem 0 2.5rem 0;margin-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:#5a5a5a}
         footer .footer-left{display:flex;flex-wrap:wrap;gap:.5rem 2rem;align-items:center}
@@ -310,16 +310,30 @@
                         <div class="field-error" id="message-error" data-i18n="error-required">Пожалуйста, напишите сообщение</div>
                     </div>
 
-                    <!-- ===== СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ ===== -->
+                    <!-- ===== ФАКС — ШУТКА ===== -->
+                    <div class="form-group">
+                        <label for="modal-fax" data-i18n="form-fax">Номер факса</label>
+                        <input type="text" id="modal-fax" name="fax" 
+                               placeholder="Просто шучу!" disabled 
+                               data-i18n-placeholder="form-fax-placeholder"
+                               class="fax-field" 
+                               style="width:100%; padding:0.8rem 1rem; border:1px solid #d0cdc8; border-radius:4px; font-family:'Inter',sans-serif; font-size:0.95rem;">
+                    </div>
+
+                    <!-- ===== СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ (3 строки, мелкий шрифт) ===== -->
                     <div class="form-group consent-check">
                         <label class="consent-check" style="display:flex; align-items:flex-start; gap:0.5rem; cursor:pointer;">
                             <input type="checkbox" id="consent" name="consent" required style="width:auto; margin-top:0.2rem; flex-shrink:0;">
                             <span>
                                 <span class="consent-text" data-i18n="consent-text">
-                                    Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок. 
-                                    <strong>Только ответ от живого человека.</strong>
+                                    Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок.
                                 </span>
-                                <span class="consent-hint" data-i18n="consent-hint">Данные только для связи. Без спама.</span>
+                                <span class="consent-text" data-i18n="consent-text-2">
+                                    Только ответ от живого человека.
+                                </span>
+                                <span class="consent-text" data-i18n="consent-hint">
+                                    Данные только для связи. Без спама.
+                                </span>
                             </span>
                         </label>
                     </div>
@@ -400,7 +414,10 @@
                     'form-service7': 'Другое',
                     'form-message': 'Сообщение *',
                     'error-required': 'Пожалуйста, заполните это поле',
-                    'consent-text': 'Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок. <strong>Только ответ от живого человека.</strong>',
+                    'form-fax': 'Номер факса',
+                    'form-fax-placeholder': 'Просто шучу!',
+                    'consent-text': 'Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок.',
+                    'consent-text-2': 'Только ответ от живого человека.',
                     'consent-hint': 'Данные только для связи. Без спама.',
                     'footer-email': 'o.sevastyanova.design@gmail.com',
                     'footer-behance': 'Behance',
@@ -462,7 +479,10 @@
                     'form-service7': 'Other',
                     'form-message': 'Message *',
                     'error-required': 'Please fill in this field',
-                    'consent-text': 'Your information will only be used to reply to your inquiry. No mailing lists. <strong>Just a response from a real person.</strong>',
+                    'form-fax': 'Fax number',
+                    'form-fax-placeholder': 'Just kidding!',
+                    'consent-text': 'Your information will only be used to reply to your inquiry. No mailing lists.',
+                    'consent-text-2': 'Just a response from a real person.',
                     'consent-hint': 'Your data is only used to get back to you. No spam.',
                     'footer-email': 'o.sevastyanova.design@gmail.com',
                     'footer-behance': 'Behance',
@@ -498,6 +518,13 @@
                     const key = el.getAttribute('data-i18n');
                     if (data[key] !== undefined) {
                         el.innerHTML = data[key];
+                    }
+                });
+                // Обновляем плейсхолдеры
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-placeholder');
+                    if (data[key] !== undefined) {
+                        el.placeholder = data[key];
                     }
                 });
                 renderTicker(lang);
