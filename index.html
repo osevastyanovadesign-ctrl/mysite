@@ -3,33 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- ===== МЕТА-ТЕГИ ДЛЯ ПОИСКОВИКОВ ===== -->
-    <title>Olga Sevastyanova · Визуальная стратегия и арт-дирекция</title>
-    <meta name="description" content="Olga Sevastyanova — визуальный стратег и арт-директор. Разработка бренд-систем, айдентики, визуальных стратегий для ритейла и e-commerce. Премиальные визуальные системы для люксовых брендов.">
-    <meta name="keywords" content="визуальная стратегия, арт-дирекция, бренд-системы, айдентика, премиальный дизайн, e-commerce дизайн, ритейл дизайн, Olga Sevastyanova">
-    <meta name="robots" content="index, follow">
-    
-    <!-- ===== ОТКРЫТЫЕ ГРАФЫ (ДЛЯ СОЦСЕТЕЙ) ===== -->
-    <meta property="og:title" content="Olga Sevastyanova · Визуальная стратегия и арт-дирекция">
-    <meta property="og:description" content="Визуальные стратегии, бренд-системы и айдентика для премиальных брендов, ритейла и e-commerce.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://osevastyanovadesign-ctrl.github.io/mysite/">
-    <meta property="og:image" content="https://osevastyanovadesign-ctrl.github.io/mysite/images/og-image.jpg">
-
-<!-- ===== FAVICON ===== -->
-<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=2">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png?v=2">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png?v=2">
-<link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png?v=2">
-<link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png?v=2">
-<link rel="manifest" href="images/site.webmanifest?v=2">
-<link rel="icon" href="images/favicon.ico?v=2" type="image/x-icon">
-    
-    <!-- ===== ШРИФТЫ ===== -->
+    <title>Olga Sevastyanova · Visual Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet">
     <style>
@@ -62,16 +37,13 @@
         .project-header p{font-size:1rem;font-weight:300;color:#4a4a4a;max-width:600px}
         .project-image-wrap{width:100%;margin-bottom:1.5rem;background:#e8e5e0;border-radius:4px;overflow:hidden;position:relative}
         .project-image-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .8s ease}
-        
-        /* ===== ВСЕ ПРОЕКТЫ — ПРОПОРЦИЯ 3:2 (как у 1815×1200) ===== */
-        .project-bristol .project-image-wrap{aspect-ratio:3/2}
-        .project-retail .project-image-wrap{aspect-ratio:3/2}
-        .project-textile .project-image-wrap{aspect-ratio:3/2}
-        .project-glass .project-image-wrap{aspect-ratio:3/2}
-        
+        .project-bristol .project-image-wrap{aspect-ratio:3/2;position:relative}
         .bristol-slideshow{position:relative;width:100%;height:100%}
         .bristol-slideshow img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease-in-out}
         .bristol-slideshow img.active{opacity:1}
+        .project-textile .project-image-wrap{aspect-ratio:3/2}
+        .project-retail .project-image-wrap{aspect-ratio:3/2}
+        .project-glass .project-image-wrap{aspect-ratio:3/2}
         .project-link{color:#1a1a1a;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.05em;border-bottom:1px solid #1a1a1a;padding-bottom:.2rem;transition:opacity .2s ease;display:inline-block}
         .project-link:hover{opacity:.6}
         .project-bristol{padding-top:6rem;padding-bottom:4rem}
@@ -118,6 +90,10 @@
         .modal-form .field-error{display:none;font-size:.75rem;color:#d32f2f;margin-top:.2rem;font-weight:400;letter-spacing:.02em}
         .modal-form .field-error.show{display:block}
         .modal-form input.error,.modal-form textarea.error{border-color:#d32f2f}
+        .modal-form .consent-check{display:flex;align-items:flex-start;gap:0.5rem;margin-top:0.25rem;cursor:pointer}
+        .modal-form .consent-check input[type="checkbox"]{width:auto;margin-top:0.2rem;flex-shrink:0}
+        .modal-form .consent-check .consent-text{font-size:0.85rem;font-weight:300;color:#4a4a4a;line-height:1.4}
+        .modal-form .consent-check .consent-hint{font-size:0.75rem;color:#6b6b6b;display:block;margin-top:0.1rem}
         @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
         footer{border-top:1px solid #e0ddd8;padding:2rem 0 2.5rem 0;margin-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem;color:#5a5a5a}
         footer .footer-left{display:flex;flex-wrap:wrap;gap:.5rem 2rem;align-items:center}
@@ -127,10 +103,6 @@
         footer .footer-right{display:flex;gap:1.5rem}
         footer .footer-right a{color:#1a1a1a;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s ease}
         footer .footer-right a:hover{border-bottom-color:#1a1a1a}
-
-        /* =========================================================
-           АНИМАЦИИ
-           ========================================================= */
         .fade-up{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
         .fade-up.visible{opacity:1;transform:translateY(0)}
         .delay-1{transition-delay:.05s}
@@ -143,10 +115,6 @@
         .hero .hero-subtitle{opacity:0;animation:fadeUp .8s .6s ease forwards}
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         .bristol-slideshow img{transition:opacity 1.2s ease-in-out}
-
-        /* =========================================================
-           СТРАНИЦА УСПЕХА
-           ========================================================= */
         .thankyou-page{display:none;min-height:100vh;align-items:center;justify-content:center;text-align:center;padding:2rem;background:#faf8f6}
         .thankyou-page.active{display:flex}
         .thankyou-content{opacity:0;transform:scale(.9) translateY(30px);transition:all .8s cubic-bezier(.34,1.56,.64,1)}
@@ -163,7 +131,6 @@
         @keyframes popIn{0%{transform:scale(0);opacity:0}80%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
         @keyframes drawCheck{to{stroke-dashoffset:0}}
         @keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
         @media(max-width:1024px){.approach{gap:3rem}}
         @media(max-width:900px){.project{padding:2.5rem 0}.project-header p{max-width:100%}.project-bristol{padding-top:4rem}.project-bristol .project-header h2{font-size:clamp(2.5rem,5vw,3.5rem)}.approach{grid-template-columns:1fr;gap:2rem;padding:3rem 0}.work-intro{flex-direction:column;align-items:flex-start}.menu{gap:1.5rem}.ticker-track span{font-size:clamp(2rem,5vw,3.5rem)}.approach-highlight{font-size:1.1rem}.contact-grid{grid-template-columns:1fr;gap:2.5rem}.contact-btn{align-self:center}.modal-content{padding:2rem 1.5rem}}
         @media(max-width:768px){.container{padding:0 1.25rem}nav{flex-direction:column;align-items:flex-start;gap:.75rem;padding:1rem 0 1.5rem 0}.menu{gap:1.5rem;flex-wrap:wrap}.hero{padding:1rem 0 3rem 0}.expertise-ticker{padding:2rem 0;margin:2rem 0}.ticker-track{gap:2rem}.ticker-track span{font-size:clamp(1.5rem,4vw,2.8rem)}.project-bristol{padding-top:3rem}.project-bristol .project-header h2{font-size:clamp(2rem,4vw,2.8rem)}footer{flex-direction:column;align-items:flex-start;gap:.75rem}footer .footer-left{flex-direction:column;align-items:flex-start;gap:.5rem}footer .footer-left .divider{display:none}.modal-content{padding:1.5rem 1.25rem}.modal-title{font-size:1.3rem}}
@@ -173,13 +140,8 @@
 </head>
 <body>
 
-    <!-- =========================================================
-         ОСНОВНОЙ САЙТ
-         ========================================================= -->
     <div class="site-content" id="siteContent">
-
         <div class="container">
-
             <div class="lang-switcher">
                 <button class="lang-btn active" data-lang="ru">RU</button>
                 <button class="lang-btn" data-lang="en">EN</button>
@@ -307,10 +269,9 @@
                     <a href="#contact" data-i18n="footer-contact">Контакты</a>
                 </div>
             </footer>
-
         </div>
 
-        <!-- ===== МОДАЛЬНОЕ ОКНО С ФОРМОЙ ===== -->
+        <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
         <div class="modal-overlay" id="modalOverlay">
             <div class="modal-content">
                 <button class="modal-close" id="closeModal">✕</button>
@@ -347,16 +308,25 @@
                         <textarea id="modal-message" name="message" placeholder="Опишите задачу или идею проекта..."></textarea>
                         <div class="field-error" id="message-error" data-i18n="error-required">Пожалуйста, напишите сообщение</div>
                     </div>
+
+                    <!-- ===== СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ ===== -->
+                    <div class="form-group consent-check">
+                        <label class="consent-check" style="display:flex; align-items:flex-start; gap:0.5rem; cursor:pointer;">
+                            <input type="checkbox" id="consent" name="consent" required style="width:auto; margin-top:0.2rem; flex-shrink:0;">
+                            <span>
+                                <span class="consent-text" data-i18n="consent-text">Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок. Только ответ от живого человека.</span>
+                                <span class="consent-hint" data-i18n="consent-hint">* Данные только для связи. Без спама.</span>
+                            </span>
+                        </label>
+                    </div>
+
                     <button type="submit" class="submit-btn" id="submitFormBtn" data-i18n="form-submit">Обсудить проект</button>
                 </form>
             </div>
         </div>
-
     </div>
 
-    <!-- =========================================================
-         СТРАНИЦА УСПЕХА
-         ========================================================= -->
+    <!-- ===== СТРАНИЦА УСПЕХА ===== -->
     <div class="thankyou-page" id="thankyouPage">
         <div class="thankyou-content">
             <div class="thankyou-animation">
@@ -426,6 +396,8 @@
                     'form-service7': 'Другое',
                     'form-message': 'Сообщение *',
                     'error-required': 'Пожалуйста, заполните это поле',
+                    'consent-text': 'Ваши данные будут использованы только для ответа на ваш запрос. Никаких рассылок. Только ответ от живого человека.',
+                    'consent-hint': '* Данные только для связи. Без спама.',
                     'footer-email': 'o.sevastyanova.design@gmail.com',
                     'footer-behance': 'Behance',
                     'footer-copy': '© Olga Sevastyanova 2026',
@@ -486,6 +458,8 @@
                     'form-service7': 'Other',
                     'form-message': 'Message *',
                     'error-required': 'Please fill in this field',
+                    'consent-text': 'Your information will only be used to reply to your inquiry. No mailing lists. No promotional emails. Just a response from a real person.',
+                    'consent-hint': '* Your data is only used to get back to you. No spam.',
                     'footer-email': 'o.sevastyanova.design@gmail.com',
                     'footer-behance': 'Behance',
                     'footer-copy': '© Olga Sevastyanova 2026',
@@ -559,7 +533,7 @@
             }
 
             // ============================================================
-            //  АНИМАЦИЯ ПОЯВЛЕНИЯ (Intersection Observer)
+            //  АНИМАЦИЯ ПОЯВЛЕНИЯ
             // ============================================================
             function initFadeAnimation() {
                 const elements = document.querySelectorAll('.fade-up');
@@ -587,6 +561,7 @@
             const msgEl = document.getElementById('modal-message');
             const serviceEl = document.getElementById('modal-service');
             const submitBtn = document.getElementById('submitFormBtn');
+            const consentCheck = document.getElementById('consent');
 
             const siteContent = document.getElementById('siteContent');
             const thankyouPage = document.getElementById('thankyouPage');
@@ -638,6 +613,14 @@
                     ok = false;
                 }
 
+                if (!consentCheck.checked) {
+                    alert(currentLang === 'ru'
+                        ? 'Пожалуйста, дайте согласие на обработку данных.'
+                        : 'Please give your consent to process your data.'
+                    );
+                    ok = false;
+                }
+
                 return ok;
             }
 
@@ -659,6 +642,7 @@
                 formData.append('email', emailEl.value.trim());
                 formData.append('service', serviceEl.value);
                 formData.append('message', msgEl.value.trim());
+                formData.append('consent', consentCheck.checked ? 'yes' : 'no');
 
                 try {
                     // Отправляем в фоне
