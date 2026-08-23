@@ -52,7 +52,16 @@
         .project-bristol .project-header h2{transition-delay:.1s}
         .expertise-ticker{padding:3rem 0;border-top:1px solid #e0ddd8;border-bottom:1px solid #e0ddd8;margin:3rem 0;overflow:hidden;background:#faf8f6}
         .ticker-track{display:flex;gap:4rem;animation:tickerScroll 25s linear infinite;width:max-content}
-        .ticker-track span{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:400;letter-spacing:.05em;color:#1a1a1a;white-space:nowrap;opacity:.9;transition:opacity .3s ease}
+        .ticker-track span{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,3.5vw,3.2rem);
+    font-weight:400;
+    letter-spacing:.03em;
+    color:#1a1a1a;
+    white-space:nowrap;
+    opacity:.9;
+    transition:opacity .3s ease
+}
         .ticker-track span:hover{opacity:.4}
         @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
         .expertise-ticker:hover .ticker-track{animation-play-state:paused}
@@ -132,7 +141,20 @@
         @keyframes drawCheck{to{stroke-dashoffset:0}}
         @keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         @media(max-width:1024px){.approach{gap:3rem}}
-        @media(max-width:900px){.project{padding:2.5rem 0}.project-header p{max-width:100%}.project-bristol{padding-top:4rem}.project-bristol .project-header h2{font-size:clamp(2.5rem,5vw,3.5rem)}.approach{grid-template-columns:1fr;gap:2rem;padding:3rem 0}.work-intro{flex-direction:column;align-items:flex-start}.menu{gap:1.5rem}.ticker-track span{font-size:clamp(2rem,5vw,3.5rem)}.approach-highlight{font-size:1.1rem}.contact-grid{grid-template-columns:1fr;gap:2.5rem}.contact-btn{align-self:center}.modal-content{padding:2rem 1.5rem}}
+        @media(max-width:900px){
+    .project{padding:2.5rem 0}
+    .project-header p{max-width:100%}
+    .project-bristol{padding-top:4rem}
+    .project-bristol .project-header h2{font-size:clamp(2.5rem,5vw,3.5rem)}
+    .approach{grid-template-columns:1fr;gap:2rem;padding:3rem 0}
+    .work-intro{flex-direction:column;align-items:flex-start}
+    .menu{gap:1.5rem}
+    .ticker-track span{font-size:clamp(1.7rem,4vw,2.8rem)}
+    .approach-highlight{font-size:1.1rem}
+    .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+    .contact-btn{align-self:center}
+    .modal-content{padding:2rem 1.5rem}
+}
         @media(max-width:768px){.container{padding:0 1.25rem}nav{flex-direction:column;align-items:flex-start;gap:.75rem;padding:1rem 0 1.5rem 0}.menu{gap:1.5rem;flex-wrap:wrap}.hero{padding:1rem 0 3rem 0}.expertise-ticker{padding:2rem 0;margin:2rem 0}.ticker-track{gap:2rem}.ticker-track span{font-size:clamp(1.5rem,4vw,2.8rem)}.project-bristol{padding-top:3rem}.project-bristol .project-header h2{font-size:clamp(2rem,4vw,2.8rem)}footer{flex-direction:column;align-items:flex-start;gap:.75rem}footer .footer-left{flex-direction:column;align-items:flex-start;gap:.5rem}footer .footer-left .divider{display:none}.modal-content{padding:1.5rem 1.25rem}.modal-title{font-size:1.3rem}}
         @media(max-width:480px){h1{font-size:2.4rem}.hero-subtitle{font-size:1rem}.approach-left h2{font-size:2.2rem}}
         html{scroll-behavior:smooth}
@@ -427,7 +449,7 @@
                     'footer-approach': 'Подход',
                     'footer-contact': 'Контакты',
                     'view-case': 'Смотреть кейс →',
-                    'ticker': ['Визуальные системы', 'Восприятие клиентов', 'Ритейл-опыт', 'Гостиничный бизнес', 'E-commerce', 'Арт-дирекция'],
+                    'ticker': ['Бренд', 'Продукт', 'Визуальные системы', 'Коммерческий дизайн'],
                     'thankyou-title': 'Спасибо!',
                     'thankyou-desc': 'Ваш запрос получен. Я свяжусь с вами в течение 24 часов.',
                     'thankyou-btn': 'Вернуться на сайт'
@@ -492,7 +514,7 @@
                     'footer-approach': 'Approach',
                     'footer-contact': 'Contact',
                     'view-case': 'View Case →',
-                    'ticker': ['Visual Systems', 'Customer Perception', 'Retail Experience', 'Hospitality', 'E-commerce', 'Art Direction'],
+                    'ticker': ['Brand', 'Product', 'Visual Systems', 'Commercial Design'],
                     'thankyou-title': 'Thank you!',
                     'thankyou-desc': 'Your request has been received. I will get back to you within 24 hours.',
                     'thankyou-btn': 'Back to site'
